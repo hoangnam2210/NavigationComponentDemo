@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#77E8FD</color>
+    <color name="colorPrimaryDark">#418DFF</color>
+    <color name="colorAccent">#00A3FF</color>
+
+    <!--Color Splash-->
+    <color name="colorSplash">#FFFFFF</color>
+
+    <!--Default color dialog background-->
+    <color name="colorDefaultDialogBackground">#65000000</color>
+
+    <color name="colorRed">#F44336</color>
+    <color name="colorRedLight">#FF6358</color>
+</resources>

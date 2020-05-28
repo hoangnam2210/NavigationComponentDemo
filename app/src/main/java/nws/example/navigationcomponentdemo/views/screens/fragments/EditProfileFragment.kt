@@ -17,6 +17,7 @@ import nws.example.navigationcomponentdemo.extensions.setNavigationResult
 import nws.example.navigationcomponentdemo.extensions.setOnClickBounceAnimationListener
 import nws.example.navigationcomponentdemo.helpers.SharedPreferencesHelper
 import nws.example.navigationcomponentdemo.utils.NavigationResultKey
+import java.lang.Exception
 
 class EditProfileFragment : BaseFragment() {
 
@@ -50,9 +51,9 @@ class EditProfileFragment : BaseFragment() {
             val username = edt_username?.text.toString()
             val password = edt_password?.text.toString()
 
-            setNavigationResult(name, NavigationResultKey.Home.NAME)
-            setNavigationResult(username, NavigationResultKey.Home.USER_NAME)
-            setNavigationResult(password, NavigationResultKey.Home.PASSWORD)
+            setNavigationResult(R.id.homeFragment, name, NavigationResultKey.Home.NAME)
+            setNavigationResult(R.id.homeFragment, username, NavigationResultKey.Home.USER_NAME)
+            setNavigationResult(R.id.homeFragment, password, NavigationResultKey.Home.PASSWORD)
 
             findNavController().previousBackStackEntry?.savedStateHandle?.set(NavigationResultKey.Home.PASSWORD, password)
 

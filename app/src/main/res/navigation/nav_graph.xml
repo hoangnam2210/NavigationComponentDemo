@@ -2,9 +2,55 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/authentication_navigation"
-    app:startDestination="@id/loginFragment">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
 
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="nws.example.navigationcomponentdemo.views.screens.fragments.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <argument
+            android:name="name"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="username"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="password"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="example.com/.*" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="nws.example.navigationcomponentdemo.views.screens.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_homeFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="nws.example.navigationcomponentdemo.views.screens.fragments.LoginFragment"
@@ -12,12 +58,12 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_home_navigation"
-            app:destination="@id/home_navigation"
+            app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/authentication_navigation">
+            app:popUpTo="@id/nav_graph">
             <argument
                 android:name="name"
                 app:argType="string" />
@@ -37,8 +83,8 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_loginFragment_to_home_navigation_no_animation"
-            app:destination="@id/home_navigation"
-            app:popUpTo="@id/loginFragment">
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph">
             <argument
                 android:name="name"
                 app:argType="string" />
@@ -57,12 +103,12 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_home_navigation"
-            app:destination="@id/home_navigation"
+            app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/authentication_navigation">
+            app:popUpTo="@id/nav_graph">
             <argument
                 android:name="name"
                 app:argType="string" />
@@ -74,7 +120,6 @@
                 app:argType="string" />
         </action>
     </fragment>
-    <include app:graph="@navigation/home_navigation" />
     <action
         android:id="@+id/action_global_loginFragment"
         app:destination="@id/loginFragment"
@@ -82,6 +127,15 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        app:popUpTo="@id/authentication_navigation"
+        app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="nws.example.navigationcomponentdemo.views.screens.fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

@@ -10,15 +10,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.screens.activities.SplashActivity"
-            android:theme="@style/AppTheme.SplashScreen">
+        <activity
+            android:name=".views.screens.activities.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="ncdemo.page.link"
+                    android:scheme="https" />
+                <data
+                    android:host="example.com"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.screens.activities.MainActivity"/>
     </application>
-
 </manifest>

@@ -17,10 +17,11 @@ class MainApplication : Application() {
     }
 
     private lateinit var mGson: Gson
-
     fun getGson(): Gson {
         return mGson
     }
+
+    var isInitDone = false
 
     override fun onCreate() {
         super.onCreate()

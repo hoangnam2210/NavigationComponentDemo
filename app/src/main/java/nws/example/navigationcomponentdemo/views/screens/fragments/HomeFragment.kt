@@ -1,6 +1,10 @@
 package nws.example.navigationcomponentdemo.views.screens.fragments
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -8,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -100,7 +105,6 @@ class HomeFragment : BaseFragment() {
         btn_logout?.setOnClickBounceAnimationListener(0.9f) {
             //remove token
             SharedPreferencesHelper.instance.put(SharedPreferencesHelper.AUTH_TOKEN, "")
-
             //navigate to login screen
             findNavController().navigate(LoginFragmentDirections.actionGlobalLoginFragment())
         }
@@ -115,6 +119,36 @@ class HomeFragment : BaseFragment() {
                     name, username, password
                 )
             )
+        }
+
+        iv_avatar?.setOnClickListener {
+            //Create notification with deep link
+            val args = Bundle()
+            args.putString("name", "name from notification")
+            args.putString("username", "username from notification")
+            args.putString("password", "password from notification")
+            val deepLink = findNavController().createDeepLink()
+                .setDestination(R.id.editProfileFragment)
+                .setArguments(args)
+                .createPendingIntent()
+            val notificationManager =
+                context?.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationManager?.createNotificationChannel(
+                    NotificationChannel(
+                        "1234", "Deep Links", NotificationManager.IMPORTANCE_HIGH
+                    )
+                )
+            }
+            val builder = NotificationCompat.Builder(
+                requireContext(), "1234"
+            )
+                .setContentTitle("Navigation")
+                .setContentText("Deep link to Android")
+                .setSmallIcon(R.drawable.ic_perm_identity_black_24dp)
+                .setContentIntent(deepLink)
+                .setAutoCancel(true)
+            notificationManager?.notify(0, builder.build())
         }
     }
 

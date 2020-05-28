@@ -10,13 +10,9 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun initView()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        changeColorStatusBar()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changeColorStatusBar()
         initView()
     }
 
